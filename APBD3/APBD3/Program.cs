@@ -7,10 +7,10 @@ class Program
         ContainerL stateczek = new ContainerL(5, 5, 10, 50);
         Console.WriteLine(stateczek);
         
-        stateczek.Loading(5);
+        stateczek.Loading(new Product("paliwo","plyn",true,10),20);
         Console.WriteLine(stateczek);
         
-        stateczek.Loading(80);
+        //stateczek.Loading(80);
         
         
         

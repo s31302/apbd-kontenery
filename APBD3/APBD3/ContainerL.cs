@@ -13,19 +13,19 @@ public class ContainerL : Container , IHazardNotifier
         Console.WriteLine(message);
     }
 
-    public void Loading(double loadMass)
+    public void Loading(Product product, double loadMass)
     {
-        //tutaj pomyslec jak to ogranac z tymi niebezpiecznymi
-        if (true)
+        double limit = product.isHazardous ? maxCapacity * 0.5 : maxCapacity * 0.9;
+        if (product.isHazardous)
         {
             Warring($"UWAGA! Do kontenera {serialNumber} zaladowywany jest niebezpieczny ladunek");
-            maxCapacity /= 2;
         }
-        else
+
+        if (loadMass + mass > limit)
         {
-            maxCapacity *= 0.9;
+            throw new OverfillException($"Przekroczono limit pojemności kontenera {serialNumber}.");
         }
         
-        base.Loading(loadMass);
+        base.Loading(product, loadMass);
     }
 }

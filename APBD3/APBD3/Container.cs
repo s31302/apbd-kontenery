@@ -9,6 +9,7 @@ public abstract class Container
     public double ownWeight;
     public string serialNumber;
     public double maxCapacity; //maksymalna ladownosc
+    public List<Product> products; //proba z produktami
 
     protected Container(double height, double depth, double ownWeight, double maxCapacity, string type)
     {
@@ -18,14 +19,16 @@ public abstract class Container
         this.maxCapacity = maxCapacity;
         mass = 0.0;
         serialNumber = $"KON-{type}-{++id}";
+        products = new List<Product>();
     }
 
     public void Unloading()
     {
         mass = 0.0;
+        products.Clear();
     }
 
-    public void Loading(double loadMass)
+    public void Loading(Product product, double loadMass)
     {
         if (loadMass > maxCapacity)
         {
@@ -33,6 +36,7 @@ public abstract class Container
             throw new OverfillException($"Nie można zaladowac!\nLadunek ktory chcesz zaladowac przekracza maksymalana ladownosc kontenera o {przekroczenie}kg." );
         }
         mass += loadMass;
+        products.Add(product);
     }
     
     public override string ToString()
