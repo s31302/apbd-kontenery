@@ -35,4 +35,9 @@ public abstract class Container
         mass += loadMass;
     }
     
+    public override string ToString()
+    {
+        return $"{serialNumber}: Load={mass}kg, OwnWeight={ownWeight}kg, MaxCapacity={maxCapacity}kg";
+    }
+    
 }

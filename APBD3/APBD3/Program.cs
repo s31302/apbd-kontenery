@@ -4,6 +4,24 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!!");
+        ContainerL stateczek = new ContainerL(5, 5, 10, 50);
+        Console.WriteLine(stateczek);
+        
+        stateczek.Loading(5);
+        Console.WriteLine(stateczek);
+        
+        stateczek.Loading(80);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }

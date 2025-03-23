@@ -3,7 +3,7 @@
 public class ContainerL : Container , IHazardNotifier
 {
     //public bool isHazardous;
-    public ContainerL(double height, double depth, double ownWeight, double maxCapacity, string type) : base(height, depth, ownWeight, maxCapacity, "L")
+    public ContainerL(double height, double depth, double ownWeight, double maxCapacity) : base(height, depth, ownWeight, maxCapacity, "L")
     {
         
     }
