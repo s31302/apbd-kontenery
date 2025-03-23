@@ -2,14 +2,16 @@
 
 public class Ship
 {
+    public string name;
     private List<Container> containers;
     private double maxSpeed;
     public int maxContainers;
     public double maxWeight;
-    static int counter = 0;
+    int counter = 0;
 
-    public Ship(double speed, int maxContainers, double maxWeight)
+    public Ship(string name, double speed, int maxContainers, double maxWeight)
     {
+        this.name = name;
         this.maxSpeed = speed;
         this.maxContainers = maxContainers;
         this.maxWeight = maxWeight;
@@ -65,7 +67,7 @@ public class Ship
     
     public override string ToString()
     {
-        return $"Ship MaxSpeed: {maxSpeed} knots, MaxContainers: {maxContainers}, MaxWeight: {maxWeight} tons, Loaded: {counter}";
+        return $"Ship {name} MaxSpeed: {maxSpeed} knots, MaxContainers: {maxContainers}, MaxWeight: {maxWeight} tons, Loaded: {counter}";
     }
     
 }
