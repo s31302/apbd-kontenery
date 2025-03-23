@@ -35,10 +35,4 @@ public abstract class Container
         mass += loadMass;
     }
     
-    
-}
-
-public class OverfillException : Exception
-{
-    public OverfillException(string message) : base(message) { }
 }

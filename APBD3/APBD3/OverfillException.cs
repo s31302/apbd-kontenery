@@ -1,6 +1,6 @@
 ﻿namespace APBD3;
 
-public class OverfillException
+public class OverfillException : Exception
 {
-    
+    public OverfillException(string message) : base(message) { }
 }
