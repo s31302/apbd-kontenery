@@ -16,6 +16,6 @@ public class ContainerG : Container, IHazardNotifier
     
     public void Warring(string message)
     {
-        Console.WriteLine(message);    
+        Console.WriteLine($"UWAGA! Zajscie niebezpieczne dla kontenera {serialNumber} : {message}");    
     }
 }
