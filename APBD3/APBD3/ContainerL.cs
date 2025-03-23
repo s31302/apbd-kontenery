@@ -3,9 +3,11 @@
 public class ContainerL : Container , IHazardNotifier
 {
     //public bool isHazardous;
-    public ContainerL(double height, double depth, double ownWeight, double maxCapacity) : base(height, depth, ownWeight, maxCapacity, "L")
+    string type = "L";
+    public ContainerL(double height, double depth, double ownWeight, double maxCapacity) : base(height, depth, ownWeight, maxCapacity)
     {
-        
+        serialNumber = $"KON-{type}-{++id}";
+
     }
 
     public void Warring(string message)

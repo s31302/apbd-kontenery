@@ -4,12 +4,15 @@ public class ContainerC : Container
 {
     public string typeOfProduct;
     public double temperature;
+
+    private string type = "C";
     //public double temperatureRequired;
 
-    public ContainerC(double height, double depth, double ownWeight, double maxCapacity, string type, string typeOfProduct, double temperature) : base(height, depth, ownWeight, maxCapacity, type)
+    public ContainerC(double height, double depth, double ownWeight, double maxCapacity, string typeOfProduct, double temperature) : base(height, depth, ownWeight, maxCapacity)
     {
         this.typeOfProduct = typeOfProduct;
         this.temperature = temperature;
+        serialNumber = $"KON-{type}-{++id}";
     }
     
     public void Loading(Product product, double loadMass)

@@ -13,14 +13,17 @@ public class Ship
         this.maxSpeed = speed;
         this.maxContainers = maxContainers;
         this.maxWeight = maxWeight;
+        containers = new List<Container>();
         
     }
     
     public void LoadingContainerOntoShip(Container cont)
     {
-        if(counter + 1  < maxContainers)
-        containers.Add(cont);
-        counter++;
+        if (counter + 1 < maxContainers)
+        {
+            containers.Add(cont);
+            counter++;
+        }
     }
     
     public void LoadingContainerOntoShip(List<Container> cont)

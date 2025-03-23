@@ -11,14 +11,13 @@ public abstract class Container
     public double maxCapacity; //maksymalna ladownosc
     public List<Product> products; //proba z produktami
 
-    protected Container(double height, double depth, double ownWeight, double maxCapacity, string type)
+    protected Container(double height, double depth, double ownWeight, double maxCapacity)
     {
         this.height = height;
         this.depth = depth;
         this.ownWeight = ownWeight;
         this.maxCapacity = maxCapacity;
         mass = 0.0;
-        serialNumber = $"KON-{type}-{++id}";
         products = new List<Product>();
     }
 
