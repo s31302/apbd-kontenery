@@ -20,12 +20,12 @@ public abstract class Container
         serialNumber = $"KON-{type}-{++id}";
     }
 
-    public virtual void Unloading()
+    public void Unloading()
     {
         mass = 0.0;
     }
 
-    public virtual void Loading(double loadMass)
+    public void Loading(double loadMass)
     {
         if (loadMass > maxCapacity)
         {
