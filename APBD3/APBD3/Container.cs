@@ -2,16 +2,16 @@
 
 public abstract class Container
 {
-    public static int id = 0;
-    public double mass;
-    public double height;
-    public double depth;
-    public double ownWeight;
+    protected static int id = 0;
+    protected double mass;
+    protected  double height;
+    protected  double depth;
+    protected  double ownWeight;
     public string serialNumber;
-    public double maxCapacity; //maksymalna ladownosc
-    public List<Product> products; //proba z produktami
+    protected  double maxCapacity; //maksymalna ladownosc
+    protected  List<Product> products;
 
-    protected Container(double height, double depth, double ownWeight, double maxCapacity)
+    public Container(double height, double depth, double ownWeight, double maxCapacity)
     {
         this.height = height;
         this.depth = depth;

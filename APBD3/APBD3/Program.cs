@@ -52,6 +52,7 @@ class Program
             Console.WriteLine();
             
             cg3.Loading(tv, 5);
+            containerL.Unloading();
 
 
             Ship ship1 = new Ship("ship1",100, 5, 500);

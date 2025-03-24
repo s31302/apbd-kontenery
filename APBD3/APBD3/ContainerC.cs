@@ -2,8 +2,8 @@
 
 public class ContainerC : Container
 {
-    public string typeOfProduct;
-    public double temperature;
+    private string typeOfProduct;
+    private double temperature;
 
     private string type = "C";
     //public double temperatureRequired;

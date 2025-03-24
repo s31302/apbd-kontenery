@@ -2,12 +2,12 @@
 
 public class Ship
 {
-    public string name;
+    private string name;
     private List<Container> containers;
     private double maxSpeed;
-    public int maxContainers;
-    public double maxWeight;
-    int counter = 0;
+    private int maxContainers;
+    private double maxWeight;
+    private int counter = 0;
 
     public Ship(string name, double speed, int maxContainers, double maxWeight)
     {

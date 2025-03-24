@@ -2,8 +2,8 @@
 
 public class ContainerL : Container , IHazardNotifier
 {
-    string type = "L";
-    bool isHazardous = false;
+    private string type = "L";
+    private bool isHazardous = false;
     public ContainerL(double height, double depth, double ownWeight, double maxCapacity) : base(height, depth, ownWeight, maxCapacity)
     {
         serialNumber = $"KON-{type}-{++id}";

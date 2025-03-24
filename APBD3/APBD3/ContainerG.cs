@@ -2,8 +2,8 @@
 
 public class ContainerG : Container, IHazardNotifier
 {
-    public double pressure;
-    string type = "G";
+    private double pressure;
+    private string type = "G";
 
     public ContainerG(double height, double depth, double ownWeight, double maxCapacity, double pressure) : base(height, depth, ownWeight, maxCapacity)
     {
