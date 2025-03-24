@@ -21,21 +21,30 @@ public abstract class Container
         products = new List<Product>();
     }
 
-    public void Unloading()
+    public virtual void Unloading()
     {
         mass = 0.0;
         products.Clear();
     }
 
-    public void Loading(Product product, double loadMass)
+    public virtual void Loading(Product product, double loadMass)
     {
-        if (loadMass > maxCapacity)
+        try
         {
-            var przekroczenie = loadMass - maxCapacity;
-            throw new OverfillException($"Nie można zaladowac!\nLadunek ktory chcesz zaladowac przekracza maksymalana ladownosc kontenera o {przekroczenie}kg." );
+            if (loadMass + mass > maxCapacity)
+            {
+                var przekroczenie = loadMass - maxCapacity;
+                throw new OverfillException(
+                    $"Nie można zaladowac!\nLadunek ktory chcesz zaladowac przekracza maksymalana ladownosc kontenera o {przekroczenie}kg.");
+            }
+
+            mass += loadMass;
+            products.Add(product);
         }
-        mass += loadMass;
-        products.Add(product);
+        catch (OverfillException e)
+        { 
+            Console.WriteLine(e.Message);
+        }
     }
     
     public override string ToString()

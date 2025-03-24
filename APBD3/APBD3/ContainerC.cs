@@ -15,17 +15,25 @@ public class ContainerC : Container
         serialNumber = $"KON-{type}-{++id}";
     }
     
-    public void Loading(Product product, double loadMass)
+    public override void Loading(Product product, double loadMass)
     {
-        if (temperature < product.requiredTemperature)
+        try
         {
-            throw new Exception("Temperatura kontenera jest za niska dla tego produktu!");
+            if (temperature < product.requiredTemperature)
+            {
+                throw new Exception("Temperatura kontenera jest za niska dla tego produktu!");
+            }
+
+            if (typeOfProduct != product.type)
+            {
+                throw new Exception($"Kontener nie przechowuje tego typu produktu! Wymagany typ: {typeOfProduct}");
+            }
+
+            base.Loading(product, loadMass);
         }
-        if (typeOfProduct != product.type)
+        catch (Exception e)
         {
-            throw new Exception($"Kontener nie przechowuje tego typu produktu! Wymagany typ: {typeOfProduct}");
+            Console.WriteLine($"Błąd w kontenerze {serialNumber}: {e.Message}");
         }
-        
-        base.Loading(product, loadMass);
     }
 }

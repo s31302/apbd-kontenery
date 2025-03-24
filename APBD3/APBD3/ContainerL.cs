@@ -2,12 +2,11 @@
 
 public class ContainerL : Container , IHazardNotifier
 {
-    //public bool isHazardous;
     string type = "L";
+    bool isHazardous = false;
     public ContainerL(double height, double depth, double ownWeight, double maxCapacity) : base(height, depth, ownWeight, maxCapacity)
     {
         serialNumber = $"KON-{type}-{++id}";
-
     }
 
     public void Warring(string message)
@@ -15,19 +14,32 @@ public class ContainerL : Container , IHazardNotifier
         Console.WriteLine(message);
     }
 
-    public void Loading(Product product, double loadMass)
+    public override void Loading(Product product, double loadMass)
     {
-        double limit = product.isHazardous ? maxCapacity * 0.5 : maxCapacity * 0.9;
-        if (product.isHazardous)
-        {
-            Warring($"UWAGA! Do kontenera {serialNumber} zaladowywany jest niebezpieczny ladunek");
-        }
-
-        if (loadMass + mass > limit)
-        {
-            throw new OverfillException($"Przekroczono limit pojemności kontenera {serialNumber}.");
-        }
+        try{
+            
+            if (product.isHazardous)
+            {
+                if (!isHazardous)
+                {
+                    isHazardous = true;
+                }
+                Warring($"UWAGA! Do kontenera {serialNumber} zaladowywany jest niebezpieczny ladunek");
+            }
+            
+            double limit = isHazardous ? maxCapacity * 0.5 : maxCapacity * 0.9;
         
-        base.Loading(product, loadMass);
+            if (loadMass + mass > limit)
+            {
+                throw new OverfillException($"Przekroczono limit pojemności kontenera {serialNumber}.");
+            }   
+        
+            mass += loadMass;
+            products.Add(product);
+        }
+        catch (OverfillException e)
+        { 
+            Console.WriteLine(e.Message);
+        }
     }
 }

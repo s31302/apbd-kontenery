@@ -12,7 +12,7 @@ public class ContainerG : Container, IHazardNotifier
 
     }
     
-    public void Unloading()
+    public override void Unloading()
     {
         mass *= 0.05;
     }

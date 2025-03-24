@@ -21,36 +21,78 @@ public class Ship
     
     public void LoadingContainerOntoShip(Container cont)
     {
-        if (counter + 1 < maxContainers)
+        try
         {
-            containers.Add(cont);
-            counter++;
+            if (counter + 1 <= maxContainers)
+            {
+                containers.Add(cont);
+                counter++;
+                
+                Console.WriteLine($"Kontener {cont.serialNumber} zostal zaladowany na statek {name}.");
+            }
+            else
+            {
+                throw new OverfillException(
+                    "Nie można zaladowac!\nLadunek ktory chcesz zaladowac przekracza maksymalana ladownosc statku.");
+            }
+        }
+        catch (OverfillException e)
+        {
+            Console.WriteLine(e.Message);
         }
     }
     
     public void LoadingContainerOntoShip(List<Container> cont)
     {
-        if(counter + cont.Count < maxContainers)
-            containers.AddRange(cont);
-        counter += cont.Count;
+        try
+        {
+            if (counter + cont.Count <= maxContainers)
+            {
+                containers.AddRange(cont);
+                counter += cont.Count;
+            }
+            else
+            {
+                throw new OverfillException(
+                    "Nie można zaladowac!\nLadunek ktory chcesz zaladowac przekracza maksymalana ladownosc statku.");
+            }
+        }
+        catch (OverfillException e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
     
     public void RemovingContainerFromShip(Container cont)
     {
-        containers.Remove(cont);
-        counter--;
+        if (containers.Contains(cont))
+        {
+            containers.Remove(cont);
+            counter--;
+
+            Console.WriteLine($"Kontener {cont.serialNumber} zostal usuniety z statku {name}.");
+        }
+        else
+        {
+            Console.WriteLine($"Kontener {cont.serialNumber} nie znajduje sie na statku {name}. Nie można usunac kontenera!");
+        }
     }
     
     public void RemovingContainerFromShip(string number)
     {
-        Container containerWithSerialNumber= containers.Find(k => k.serialNumber == number);
-        
+        Container containerWithSerialNumber = containers.Find(k => k.serialNumber == number);
+    
         if (containerWithSerialNumber != null)
         {
-            //containerWithSerialNumber.Wyladunek();
             containers.Remove(containerWithSerialNumber);
+            counter--;
+        }
+        else
+        {
+            Console.WriteLine($"Kontener {number} nie znajduje sie na statku {name}. Nie można usunac kontenera!");
         }
     }
+
     
     public void ContainerTransferBetweenShips(Container cont, Ship ship)
     {
@@ -60,14 +102,25 @@ public class Ship
     
     public void ReplaceContainerAnother(string serialNumber, Container cont)
     {
-        RemovingContainerFromShip(serialNumber);
-        LoadingContainerOntoShip(cont);
+        Container containerWithSerialNumber = containers.Find(k => k.serialNumber == serialNumber);
+    
+        if (containerWithSerialNumber != null)
+        {
+            RemovingContainerFromShip(serialNumber);
+            LoadingContainerOntoShip(cont);
+        }
+        else
+        {
+            Console.WriteLine($"Kontener o numerze seryjnym {serialNumber} nie zostal znaleziony na statku {name}. Nie moze dojac do wymiany.");
+        }
     }
     
     
     public override string ToString()
     {
-        return $"Ship {name} MaxSpeed: {maxSpeed} knots, MaxContainers: {maxContainers}, MaxWeight: {maxWeight} tons, Loaded: {counter}";
+        string containersList = string.Join(", ", containers.Select(c => c.serialNumber));
+        
+        return $"Ship {name} MaxSpeed: {maxSpeed} knots, MaxContainers: {maxContainers}, MaxWeight: {maxWeight} tons, Loaded: {counter} \nContainers: [{containersList}]\n";
     }
     
 }
